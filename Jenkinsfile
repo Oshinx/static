@@ -10,7 +10,7 @@ pipeline {
                  '''
              }
          }
-         stage('Lint HTML') {
+  /*        stage('Lint HTML') {
               steps {
                   sh 'tidy -q -e *.html'
               }
@@ -27,6 +27,6 @@ pipeline {
                       s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'index.html', bucket:'static-jenkins-pipeline')
                   }
               }
-         }
+         } */
      }
 }
