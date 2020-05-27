@@ -12,22 +12,10 @@ pipeline {
     }
 
     stage('Upload to AWS') {
-      parallel {
-        stage('Upload to AWS') {
-          steps {
-            withAWS(region: 'us-west-2', credentials: 'aws-static') {
-              sh 'echo "Uploading content with AWS creds"'
-              s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'index.html', bucket: 'udacitybluegreendeplo')
-            }
-
-          }
-        }
-
-        stage('LintHtml') {
-          steps {
-            sh '''tidy -q -e *.html
-'''
-          }
+      steps {
+        withAWS(region: 'us-west-2', credentials: 'aws-static') {
+          sh 'echo "Uploading content with AWS creds"'
+          s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'index.html', bucket: 'udacitybluegreendeplo')
         }
 
       }
